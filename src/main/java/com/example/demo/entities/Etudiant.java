@@ -1,12 +1,11 @@
-package com.example.demo.Entities;
+package com.example.demo.entities;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Date;
 
 @Entity
@@ -14,14 +13,20 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Etudiant implements Serializable  {
+
+public class Etudiant implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEtudiant;
+    private Long idEtudiant;
     private String nomEt;
     private String prenomEt;
-    private long cin;
+
+    @NonNull
+    private long cin ;
     private String ecole;
-    @Temporal(TemporalType.DATE)
     private Date dateNaissance;
+
+    @ManyToMany(mappedBy = "etudiants")
+    private List<Reservation> reservations;
 }
