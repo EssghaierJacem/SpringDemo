@@ -1,12 +1,12 @@
-package com.example.demo.Entities;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,5 +19,11 @@ public class Chambre implements Serializable {
     private long idChambre;
     private long numeroChambre;
     @Enumerated(EnumType.STRING)
-    private TypeChambre typechambre;
+    private TypeChambre TypeChambre;
+
+    @ManyToOne
+    private Bloc bloc;
+
+    @OneToMany
+    private List<Reservation> reservations;
 }
